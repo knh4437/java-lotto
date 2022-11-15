@@ -22,7 +22,8 @@ public class GenerateLotto {
     }
 
     private List<Integer> generateNumbers() {
-        List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
+        List<Integer> random = Randoms.pickUniqueNumbersInRange(1, 45, 6);
+        List<Integer> numbers = new ArrayList<>(random);
         numbers.sort(Comparator.naturalOrder());
         return numbers;
     }
