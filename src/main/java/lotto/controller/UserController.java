@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.Money;
 import lotto.domain.WinningNumber;
 import lotto.service.InputService;
@@ -22,5 +23,11 @@ public class UserController {
         outputService.requestWinningNumber();
         WinningNumber winningNumber = inputService.requestWinningNumber();
         return winningNumber.getWinningNumber();
+    }
+
+    public int requestBonusNumber() {
+        outputService.requestBonusNumber();;
+        BonusNumber bonusNumber = inputService.requestBonusNumber();
+        return bonusNumber.getNumber();
     }
 }
