@@ -1,10 +1,12 @@
 package lotto.controller;
 
+import lotto.Prize;
 import lotto.domain.Lotto;
 import lotto.domain.Money;
 import lotto.domain.WinningNumber;
 import lotto.service.CompareNumber;
 import lotto.service.GenerateLotto;
+import lotto.service.ResultPrize;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,8 +15,6 @@ public class LottoController {
 
     private final UserController userController = new UserController();
     private final GenerateLotto generateLotto = new GenerateLotto();
-
-    private final CompareNumber compareNumber = new CompareNumber();
 
     public void start() {
         HashMap<Integer, Integer> sameMap = new HashMap<>();
@@ -25,15 +25,9 @@ public class LottoController {
         List<Lotto> lottoList = generateLotto.generateLottoList(amount);
         List<Integer> winningNumber = userController.requestWinningNumber();
         int bonusNumber = userController.requestBonusNumber();
-        int index = 0;
-        for (Lotto lotto : lottoList) {
-            int count;
-            if ((count = compareNumber.CompareLotto(lotto.getNumbers(), winningNumber))>0)
-                sameMap.put(index, count);
-            if (compareNumber.CompareBonuseLotto(bonusNumber, lotto.getNumbers()))
-                bonusMap.put(index, true);
-            index++;
-        }
+        ResultPrize resultPrize = new ResultPrize(lottoList, winningNumber, bonusNumber);
+        HashMap<String, Integer> prize = resultPrize.CalResult();
+        userController.printResult(prize, money);
     }
 
     public int amountLotto(int money) {
