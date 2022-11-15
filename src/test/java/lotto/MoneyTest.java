@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class PurchaseMoneyTest {
+public class MoneyTest {
 
     @DisplayName("구매 금액이 1000원단위가 아닐 경우 예외 발생")
     @Test
